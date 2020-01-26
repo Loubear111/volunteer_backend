@@ -15,10 +15,10 @@ class organization(models.Model):
 
 class event(models.Model):
 	longitude = models.FloatField()
-	latitude = models.FloatField()
+	latitude = models.FloatField(default=0.0,null=True,blank=True)
 	num_people = models.IntegerField()
-	start_time = models.DateTimeField()
-	end_time = models.DateTimeField()
+	start_time = models.CharField(max_length=100)
+	end_time = models.CharField(max_length=100)
 	pph = models.IntegerField()
 	eid = models.IntegerField(primary_key=True)
 	name = models.CharField(max_length=300)
