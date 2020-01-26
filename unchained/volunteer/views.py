@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
-from volunteer.models import event, user, organization, event_user_junction
+from volunteer.models import event, user, organization
 
 # Create your views here.
 def index(request):
@@ -37,23 +37,35 @@ def org_stats(request,uname):
 	return response"""
 
 def events(request,min_lat,max_lat,min_long,max_long):
-	response = event.objects.filter(latitude>=min_lat).filter(latitude<=max_lat).filter(longitude>=min_long).filter(longitude<=max_long)
+	response = event.objects.filter(latitude__gte=min_lat).filter(latitude__lte=max_lat).filter(longitude__gte=min_long).filter(longitude__lte=max_long).values()
+	longitudes = []
+	latitudes = []
+	names = []
+	start_times = []
+	end_times = []
+	pphs = []
+	eids = []
+	organizers = []
+	
 	for entry in response:
-		longitudes = longitudes + enty[longitude]
-		latitudes = latitudes + entry[latitude]
-		names = names + entry[name]
-		start_times = start_times + entry[start_times]
-		end_times = end_times + entry[end_time]
-		pphs = pphs + entry[pph]
-		eids = eids + entry[eid]
-		organizers = organizers + entry[organizer]
-	return JsonResponse([{'organizers':organizers},{'eids':eids},{'longitudes':longitudes},{'latitudes':latidues},{'names':names},{'start_times':start_times},{'end_times':end_times},{'pphs':pphs}])
+		longitudes.append(entry["longitude"])
+		latitudes.append(entry['latitude'])
+		names.append(entry['name'])
+		start_times.append(entry['start_time'])
+		end_times.append(entry['end_time'])
+		pphs.append(entry['pph'])
+		eids.append(entry['eid'])
+		#organizers = organizers.append(entry['host_org'])
+	return JsonResponse([{'eids':eids,'longitudes':longitudes,'latitudes':latitudes,'names':names,'start_times':start_times,'end_times':end_times,'pphs':pphs}],safe=False)
 
 def login(request,uname):
 	response = user.objects.filter(username=uname).values()
-	print(response)
-	for entry in response:
-		return JsonResponse(entry)
+	
+	if not response:
+		return JsonResponse({"exists": False})
+	else:
+		for entry in response:
+			return JsonResponse({"exists": True})
 
 def insert_user(request,uname,nm,loc):
 	b = user(username=uname,name=nm,points=0,location=loc)

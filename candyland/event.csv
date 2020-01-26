@@ -1,7 +1,6 @@
-
-longitude,latitude,num_people,start_time,end_time,pph,eid,name,host_org
-93.27805556,45.14388889,10,4:00 PM,6:00 PM,10,1,Feed My Starving Children Event,feed_my_starving_children
-93.25666667,44.97222222,15,12:00 PM,3:00 PM,10,2,American Red Cross Event,american_red_cross
-93.28055556,44.84861111,5,5:30 PM,6:30 PM,10,3,Bridging Event,bridging
-93.36361111,44.93888889,20,2:00 PM,3:00 PM,10,4,Underdog Rescue Event,underdog_rescue
-93.39194444,45.08388889,10,1:00 PM,3:00 PM,10,5,Second Harvest Heartland Event,second_harvest_heartland
+num_people,start_time,end_time,pph,eid,name,host_org,latitude,longitude
+10,4:00 PM,6:00 PM,10,1,Feed My Starving Children Event,feed_my_starving_children,45.14388889,93.27805556
+15,12:00 PM,3:00 PM,10,2,American Red Cross Event,american_red_cross,44.97222222,93.25666667
+5,5:30 PM,6:30 PM,10,3,Bridging Event,bridging,44.84861111,93.28055556
+20,2:00 PM,3:00 PM,10,4,Underdog Rescue Event,underdog_rescue,44.93888889,93.36361111
+10,1:00 PM,3:00 PM,10,5,Second Harvest Heartland Event,second_harvest_heartland,45.08388889,93.39194444
